@@ -8,14 +8,7 @@
  * @format
  */
 
-import React, {Fragment} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 
 export default () => (<View/>);
