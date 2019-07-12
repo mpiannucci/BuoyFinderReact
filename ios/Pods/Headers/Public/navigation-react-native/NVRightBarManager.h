@@ -1,0 +1,1 @@
+../../../../../node_modules/navigation-react-native/ios/NVRightBarManager.h
