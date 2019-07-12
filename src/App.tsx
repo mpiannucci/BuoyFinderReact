@@ -1,14 +1,19 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * 
- * Generated with the TypeScript template
- * https://github.com/emin93/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
-import {View} from 'react-native';
+import {StateNavigator} from 'navigation';
+import {NavigationHandler} from 'navigation-react';
+import {NavigationStack} from 'navigation-react-native';
+import Home from './screens/home';
 
-export default () => (<View/>);
+var stateNavigator = new StateNavigator([
+  {key: 'home'},
+]);
+
+var {home} = stateNavigator.states;
+
+home.renderScene = () => (<Home/>);
+
+export default () => (
+  <NavigationHandler stateNavigator={stateNavigator}>
+    <NavigationStack />
+  </NavigationHandler>
+);
