@@ -1,17 +1,31 @@
 import React from 'react';
 import { View, TouchableHighlight, StyleSheet, Text } from 'react-native';
+import { Station } from '../api';
 
-export default StationSearchItem = ({ station, onPress }) => (
-    <TouchableHighlight underlayColor={'#efefef'} onPress={onPress}>
+interface StationSearchItemProps {
+    station: Station;
+    onPress: () => void;
+}
+
+const stationColor = (met?: boolean): string => {
+    if (met === undefined) {
+        return 'red';
+    }
+
+    return met ? 'green' : 'red'
+}
+
+const StationSearchItem = (props: StationSearchItemProps) => (
+    <TouchableHighlight underlayColor={'#efefef'} onPress={props.onPress}>
         <View style={styles.rowContainer}>
-            <View style={[styles.buoyIcon, {backgroundColor: station.met == 'y' ? 'green' : 'red'}]}>
+            <View style={[styles.buoyIcon, {backgroundColor: stationColor(props.station.met)}]}>
                 <Text style={styles.buoyIconText}>
-                    {station.type.charAt(0).toUpperCase()}
+                    {props.station.type.charAt(0).toUpperCase()}
                 </Text>
             </View>
             <View style={styles.textContainer}>
-                <Text style={styles.nameText}>{station.name}</Text>
-                <Text numberOfLines={3}>Station {station.id} • {station.pgm} • {station.owner}</Text>
+                <Text style={styles.nameText}>{props.station.name}</Text>
+                <Text numberOfLines={3}>Station {props.station.id} • {props.station.pgm} • {props.station.owner}</Text>
             </View>
         </View>
     </TouchableHighlight>
@@ -48,3 +62,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
+
+export default StationSearchItem;
