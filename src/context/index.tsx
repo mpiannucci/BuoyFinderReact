@@ -1,7 +1,7 @@
 import React, { useContext, Dispatch } from 'react';
 import { Station } from '../api';
 
-enum DataActionType {
+export enum DataActionType {
     Set = 'SET',
     SetLoading = 'SET_LOADING',
     Clear = 'CLEAR',
@@ -13,7 +13,7 @@ interface DataAction<T> {
 }
 
 interface DataState<T> {
-    isLoading: Boolean,
+    isLoading: boolean,
     data?: T,
 }
 
@@ -46,9 +46,9 @@ function useDataReducer<T>(): [DataState<T>, React.Dispatch<DataAction<T>>] {
 /**
  * Stations state
  */
-type StationsData = Station[];
-type StationsDataAction = DataAction<Station[]>;
-type StationsDataState = DataState<Station[]>;
+export type StationsData = Station[];
+export type StationsDataAction = DataAction<Station[]>;
+export type StationsDataState = DataState<Station[]>;
 
 const StationsStateContext = React.createContext({isLoading: false} as StationsDataState);
 const StationsDispatchContext = React.createContext({} as React.Dispatch<StationsDataAction>);

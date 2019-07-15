@@ -4,7 +4,7 @@ import { Station } from '../api';
 
 interface StationSearchItemProps {
     station: Station;
-    onPress: () => void;
+    onPress?: () => void;
 }
 
 const stationColor = (met?: boolean): string => {

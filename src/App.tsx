@@ -11,7 +11,9 @@ var stateNavigator = new StateNavigator([
 
 var { home } = stateNavigator.states;
 
-home.renderScene = () => (<Home />);
+home.renderScene = () => <Home />;
+
+stateNavigator.navigate('home');
 
 export default () => (
   <AppStateProvider>
