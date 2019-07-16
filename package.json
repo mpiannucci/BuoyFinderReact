@@ -5,9 +5,11 @@
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build-web": "webpack"
   },
   "dependencies": {
+    "babel-loader": "^8.0.6",
     "navigation": "^5.2.0",
     "navigation-react": "^4.1.1",
     "navigation-react-mobile": "^3.0.0",
@@ -16,7 +18,9 @@
     "react-dom": "^16.8.6",
     "react-native": "0.60.3",
     "react-native-web": "^0.11.5",
-    "react-native-xml2js": "^1.0.3"
+    "react-native-xml2js": "^1.0.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

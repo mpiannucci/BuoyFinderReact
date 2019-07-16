@@ -5,7 +5,7 @@ module.exports = {
     entry: "./index.web.js",
     output: {
         path: __dirname,
-        filename: "app.web.js"
+        filename: "index-compiled.web.js"
     },
     module: {
         rules: [
