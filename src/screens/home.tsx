@@ -22,7 +22,6 @@ const HomeScreen = (props: any) => {
 	};
 
 	useEffect(() => {
-		console.log('USE EFFECT');
 		fetchStationsData();
 	}, []);
 
@@ -45,14 +44,15 @@ const HomeScreen = (props: any) => {
 
 	return (
 		<ScrollView contentInsetAdjustmentBehavior='automatic'>
-			{/* <FlatList
+			<FlatList
 				contentInsetAdjustmentBehavior={'automatic'}
 				refreshing={stationsState.isLoading}
 				data={matchedStations}
 				renderItem={(info) => (
 					<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
 				)}
-			/> */}
+			/>
+			{/*
 			<NavigationBarIOS largeTitle={true} title={'Search'}>
 					<SearchBarIOS onChangeText={(newSearch) => {
 						setSearchQuery(newSearch)
@@ -66,6 +66,7 @@ const HomeScreen = (props: any) => {
 						/>
 					</SearchBarIOS>
 				</NavigationBarIOS>
+			*/}
 		</ScrollView>
 	);
 }

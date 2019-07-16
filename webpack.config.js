@@ -9,14 +9,15 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } }
+            { test: /.tsx?$/, loader: "ts-loader" },
+            { test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } },
         ]
     },
     resolve: {
+        extensions: ['.ts', '.web.tsx', '.tsx', '.web.js', '.js'],
         alias: {
             'react-native$': 'react-native-web',
             'navigation-react-native$': path.resolve(__dirname, 'navigation-react-native-web.js'),
-
         }
     }
 };
