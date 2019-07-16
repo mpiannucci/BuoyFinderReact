@@ -16,7 +16,7 @@ const stationColor = (met?: boolean): string => {
 }
 
 const StationSearchItem = (props: StationSearchItemProps) => (
-    <TouchableHighlight underlayColor={'#efefef'} onPress={props.onPress}>
+    <TouchableHighlight key={props.station.id} underlayColor={'#efefef'} onPress={props.onPress}>
         <View style={styles.rowContainer}>
             <View style={[styles.buoyIcon, {backgroundColor: stationColor(props.station.met)}]}>
                 <Text style={styles.buoyIconText}>
