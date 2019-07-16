@@ -15,6 +15,7 @@ const HomeScreen = (props: any) => {
 			type: DataActionType.SetLoading,
 		});
 		const new_cameras = await fetchStations();
+		console.log('Fetched Stations')
 		stationsDispatch({
 			type: DataActionType.Set,
 			payload: new_cameras,
@@ -22,6 +23,7 @@ const HomeScreen = (props: any) => {
 	};
 
 	useEffect(() => {
+		console.log('FETCHING')
 		fetchStationsData();
 	}, []);
 
@@ -43,32 +45,45 @@ const HomeScreen = (props: any) => {
 	);
 
 	return (
-		<ScrollView contentInsetAdjustmentBehavior='automatic'>
-			<FlatList
-				contentInsetAdjustmentBehavior={'automatic'}
-				refreshing={stationsState.isLoading}
-				data={matchedStations}
-				renderItem={(info) => (
-					<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
-				)}
-			/>
-			{/*
-			<NavigationBarIOS largeTitle={true} title={'Search'}>
-					<SearchBarIOS onChangeText={(newSearch) => {
-						setSearchQuery(newSearch)
-					}} obscureBackground={false}>
-						<FlatList
-							contentInsetAdjustmentBehavior={'automatic'}
-							data={matchedStations}
-							renderItem={(info) => (
-								<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
-							)}
-						/>
-					</SearchBarIOS>
-				</NavigationBarIOS>
-			*/}
-		</ScrollView>
+		<FlatList
+			contentInsetAdjustmentBehavior={'automatic'}
+			refreshing={stationsState.isLoading}
+			data={matchedStations}
+			renderItem={(info) => (
+				<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
+			)}
+		/>
 	);
+
+	// return (
+	// 	<ScrollView contentInsetAdjustmentBehavior='automatic'>
+	// 		<FlatList
+	// 			contentInsetAdjustmentBehavior={'automatic'}
+	// 			refreshing={stationsState.isLoading}
+	// 			data={matchedStations}
+	// 			renderItem={(info) => (
+	// 				<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
+	// 			)}
+	// 		/>
+	// 		{
+	// 		<NavigationBarIOS largeTitle={true} title={'Search'}>
+	// 				<SearchBarIOS onChangeText={(newSearch) => {
+	// 					setSearchQuery(newSearch)
+	// 				}} obscureBackground={false}>
+	// 					<FlatList
+	// 						contentInsetAdjustmentBehavior={'automatic'}
+	// 						data={matchedStations}
+	// 						renderItem={(info) => (
+	// 							<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
+	// 						)}
+	// 					/>
+	// 				</SearchBarIOS>
+	// 			</NavigationBarIOS>
+
+	// 	</ScrollView>
+	// 	}
+	// 	</View>
+	// );
 }
 
 

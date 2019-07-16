@@ -4,7 +4,10 @@ import { Station, parseActive, cleanName } from './station';
 const activeStationsUrl = 'https://www.ndbc.noaa.gov/activestations.xml';
 
 export async function fetchStations(): Promise<Station[]> {
-    const rawStationsResponse = await fetch(activeStationsUrl);
+    const rawStationsResponse = await fetch(activeStationsUrl, {
+        mode: 'no-cors',
+        headers: {Accept: 'text/xml'},
+    });
     const rawStationsData = await rawStationsResponse.text();
 
     return new Promise((resolve, reject) => {
