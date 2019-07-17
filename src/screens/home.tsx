@@ -27,7 +27,7 @@ const HomeScreen = (props: any) => {
 	}, []);
 
 	const stations = stationsState.data === undefined ? [] : stationsState.data;
-	const matchedStations = stationsState.data === undefined ? [] : stationsState.data.filter(
+	const matchedStations = stationsState.data === undefined || searchQuery === '' ? [] : stationsState.data.filter(
 		(station, index) => {
 			var idMatch = false;
 			if (station.id !== undefined) {
@@ -45,31 +45,35 @@ const HomeScreen = (props: any) => {
 
 	return (
 		<ScrollView contentInsetAdjustmentBehavior='automatic'>
-			{/* <FlatList
+			<FlatList
+				style={{ backgroundColor: 'white' }}
 				contentInsetAdjustmentBehavior={'automatic'}
 				refreshing={stationsState.isLoading}
-				data={matchedStations}
+				data={stations}
 				renderItem={(info) => (
 					<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
 				)}
-			/> */}
+			/>
 			<NavigationBarIOS largeTitle={true} title={'Search'}>
-					<SearchBarIOS onChangeText={(newSearch) => {
+				<SearchBarIOS
+					onChangeText={(newSearch) => {
+						if (newSearch === undefined) {
+							return;
+						}
 						setSearchQuery(newSearch)
 					}} obscureBackground={false}>
-						<FlatList
-							contentInsetAdjustmentBehavior={'automatic'}
-							data={matchedStations}
-							renderItem={(info) => (
-								<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
-							)}
-						/>
-					</SearchBarIOS>
-				</NavigationBarIOS>
+					<FlatList
+						style={{ backgroundColor: 'white' }}
+						contentInsetAdjustmentBehavior={'automatic'}
+						data={matchedStations}
+						renderItem={(info) => (
+							<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
+						)}
+					/>
+				</SearchBarIOS>
+			</NavigationBarIOS>
 		</ScrollView>
 	);
 }
-
-
 
 export default HomeScreen;
