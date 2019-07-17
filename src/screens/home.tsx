@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { NavigationBarIOS, RightBarIOS, BarButtonIOS } from 'navigation-react-native';
+import { NavigationBarIOS, RightBarIOS, BarButtonIOS, NavigationStack } from 'navigation-react-native';
 import { useStationsState, useStationsDispatch, DataActionType } from '../context';
 import { fetchStations } from '../api';
-import { SafeAreaView, View, Text, ScrollView, ListView, FlatList, Alert } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, ListView, FlatList, Alert, Modal } from 'react-native';
 import StationSearchItem from '../components/station_search_item';
+import { StateNavigator } from 'navigation';
+import SearchScreen from './search';
+import { NavigationHandler } from 'navigation-react';
+
+const searchNavigator = new StateNavigator([
+	{ key: 'search' },
+]);
+
+var { search } = searchNavigator.states;
+search.renderScene = () => <SearchScreen />;
+
+searchNavigator.navigate('search');
+
 
 const HomeScreen = (props: any) => {
 	const stationsDispatch = useStationsDispatch();
+	const [searchVisible, setSearchVisible] = useState(false);
 
 	const fetchStationsData = async () => {
 		stationsDispatch({
@@ -25,10 +39,15 @@ const HomeScreen = (props: any) => {
 
 	return (
 		<ScrollView contentInsetAdjustmentBehavior='automatic'>
+			<Modal visible={searchVisible} >
+				<NavigationHandler stateNavigator={searchNavigator}>
+					<NavigationStack />
+				</NavigationHandler>
+			</Modal>
 			<NavigationBarIOS largeTitle={true} title={'BuoyFinder'}>
 				<RightBarIOS>
-					<BarButtonIOS image={require('./../assets/search.png')} onPress={() =>{
-						Alert.alert('TEST', 'test');
+					<BarButtonIOS image={require('./../assets/search.png')} onPress={() => {
+						setSearchVisible(true);
 					}} />
 				</RightBarIOS>
 			</NavigationBarIOS>
