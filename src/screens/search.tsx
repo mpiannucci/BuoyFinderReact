@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavigationBarIOS, SearchBarIOS, RightBarIOS } from 'navigation-react-native';
+import { NavigationBarIOS, SearchBarIOS, RightBarIOS, BarButtonIOS } from 'navigation-react-native';
 import { useStationsState, useStationsDispatch, DataActionType } from '../context';
 import { fetchStations } from '../api';
 import { SafeAreaView, View, Text, ScrollView, ListView, FlatList, Alert } from 'react-native';
@@ -38,6 +38,9 @@ const SearchScreen = (props: any) => {
 				)}
 			/>
 			<NavigationBarIOS largeTitle={true} title={'Search'}>
+				<RightBarIOS>
+					<BarButtonIOS systemItem={'done'} onPress={props.onFinish} />
+				</RightBarIOS>
 				<SearchBarIOS
 					onChangeText={(newSearch) => {
 						if (newSearch === undefined) {

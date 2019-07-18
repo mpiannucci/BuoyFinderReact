@@ -8,16 +8,6 @@ import { StateNavigator } from 'navigation';
 import SearchScreen from './search';
 import { NavigationHandler } from 'navigation-react';
 
-const searchNavigator = new StateNavigator([
-	{ key: 'search' },
-]);
-
-var { search } = searchNavigator.states;
-search.renderScene = () => <SearchScreen />;
-
-searchNavigator.navigate('search');
-
-
 const HomeScreen = (props: any) => {
 	const stationsDispatch = useStationsDispatch();
 	const [searchVisible, setSearchVisible] = useState(false);
@@ -37,9 +27,20 @@ const HomeScreen = (props: any) => {
 		fetchStationsData();
 	}, []);
 
+	const searchNavigator = new StateNavigator([
+		{ key: 'search' },
+	]);
+	
+	var { search } = searchNavigator.states;
+	search.renderScene = () => <SearchScreen onFinish={()=>setSearchVisible(false)} />;
+	
+	searchNavigator.navigate('search');
+	
+
 	return (
+		
 		<ScrollView contentInsetAdjustmentBehavior='automatic'>
-			<Modal visible={searchVisible} >
+			<Modal visible={searchVisible} animationType={'slide'} >
 				<NavigationHandler stateNavigator={searchNavigator}>
 					<NavigationStack />
 				</NavigationHandler>
