@@ -37,11 +37,12 @@ const SearchScreen = (props: any) => {
 					<StationSearchItem station={info.item} onPress={() => Alert.alert(info.item.name, info.item.owner)} />
 				)}
 			/>
-			<NavigationBarIOS largeTitle={true} title={'Search'}>
+			<NavigationBarIOS title={'Search'}>
 				<RightBarIOS>
 					<BarButtonIOS systemItem={'done'} onPress={props.onFinish} />
 				</RightBarIOS>
 				<SearchBarIOS
+					hideNavigationBar={true}
 					onChangeText={(newSearch) => {
 						if (newSearch === undefined) {
 							return;
